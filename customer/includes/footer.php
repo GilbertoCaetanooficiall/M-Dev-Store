@@ -8,13 +8,25 @@
                 <li><a href="../cart.php">Shopping Cart</a></li>
                 <li><a href="../contact.php">Contact Us</a></li>
                 <li><a href="../shop.php">Shop</a></li>
-                <li><a href="my_account.php">Account</a></li>
+                <li><?php
+                       if (isset($_SESSION['customer_email'])) {
+                        echo "<a href='my_account.php'>My account</a>";
+                       }else {
+                        echo "<a href='../checkout.php'>My account</a>";
+                       }?></li>
             </ul>
                <hr>
                <h4>User Section</h4>
                 <ul>
-                    <li><a href="checkout.php">Login</a></li>
-                    <li><a href="../customer_register.php">Register</a></li>
+                   <?php
+                   if (isset($_SESSION['customer_email'])) {
+                    echo" <li><a href='my_account.php?edit_account'>Edit account</a></li>
+                    <li><a href='my_account.php'>My acount</a></li>";
+                   }else {
+                    echo" <li><a href='../checkout.php'>Login</a></li>
+                    <li><a href='../customer_register.php'>Register</a></li>";
+                   }
+                   ?>
                 </ul>
 
                 <hr class="hidden-md hidden-lg hidden-sm">

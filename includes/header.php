@@ -1,5 +1,9 @@
-<?php include ("includes/db.php");
-   include("functions/function.php"); ?>
+<?php 
+        session_start();
+    include ("includes/db.php");
+   include("functions/function.php");
+        
+   ?>
 
 <?php
 if (isset($_GET['id_produto'])) {
@@ -43,8 +47,15 @@ if (isset($_GET['id_produto'])) {
            
            <div class="col-md-6 offer"><!-- col-md-6 offer Begin -->
                
-               <a href="#" class="btn btn-success btn-sm">Welcome</a>
-               <a href="checkout.php"><?php items(); ?> Items In Your Cart | Total Price: <?php total();?> KZ</a>
+               <a href="#" class="btn btn-success btn-sm"><?php
+               
+               if (!isset($_SESSION['customer_email'])) {
+                echo "Bem-vindo :";
+               }else {
+                    echo "Bem-vindo:". $_SESSION['customer_email']."";
+                }
+               ?></a>
+               <a href="checkout.php"><?php items(); ?> Items In Your Cart </a>
                
            </div><!-- col-md-6 offer Finish -->
            
@@ -56,13 +67,25 @@ if (isset($_GET['id_produto'])) {
                        <a href="customer_register.php">Register</a>
                    </li>
                    <li>
-                       <a href="customer/my_account.php">My Account</a>
+                      <?php
+                       if (isset($_SESSION['customer_email'])) {
+                        echo "<a href='customer/my_account.php'>My account</a>";
+                       }else {
+                        echo "<a href='checkout.php'>My account</a>";
+                       }?>
                    </li>
                    <li>
                        <a href="cart.php">Go To Cart</a>
                    </li>
                    <li>
-                       <a href="checkout.php">Login</a>
+                       <a href="checkout.php"><?php
+               
+               if (!isset($_SESSION['customer_email'])) {
+                echo "<a href='checkout.php'>Login</a>";
+               }else {
+                    echo "<a href='logout.php'>Sair</a>";
+                }
+               ?></a>
                    </li>
                    
                </ul><!-- menu Finish -->
@@ -116,8 +139,13 @@ if (isset($_GET['id_produto'])) {
                        <li class="<?php if ($active=='Shop') {echo "active";}?>">
                            <a href="shop.php">Shop</a>
                        </li>
-                       <li>
-                           <a href="customer/my_account.php">My Account</a>
+                       <li class="<?php if ($active=='my_account') {echo "active";}?>">
+                       <?php
+                       if (isset($_SESSION['customer_email'])) {
+                        echo "<a href='customer/my_account.php'>My account</a>";
+                       }else {
+                        echo "<a href='checkout.php'>My account</a>";
+                       }?>
                        </li>
                        <li class="<?php if ($active=='Shopping Cart') {echo "active";}?>">
                            <a href="cart.php">Shopping Cart</a>

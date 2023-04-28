@@ -10,12 +10,12 @@
         <thead>
             <tr>
                 <th>Detalhes da conta bancária: </th>
-                <th>BAI</th>
+                <th>IBAN</th>
             </tr>
         </thead>
         <tbody>
             <td>Banco: BAI | Conta Nº: 016881842010001 | Nome: Gilberto Márcio José Caetano</td>
-            <td> AO06 00.400.0000.6881.8420.1019.2</td>
+            <td> AO06 00.40.0000.6881.8420.1019.2</td>
         </tbody>
 
     </table>

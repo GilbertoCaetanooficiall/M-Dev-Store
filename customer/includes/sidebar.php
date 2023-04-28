@@ -1,13 +1,22 @@
 <div class="panel panel-default sidebar-menu">
-   <div class="panel-heading">
-    <center>
-        <img src="customer_images/IMG_06392 (2).jpg" alt="Mdev Profile" width="200px">
-    </center>
-    <br/>
-    <h3 align="center" class="panel-title">
-        name: Mr. Gilberto
-    </h3>
-   </div> 
+  <?php 
+    $customer_session=$_SESSION['customer_email'];
+    $select_customer="SELECT * FROM customer WHERE customer_email='$customer_session'";
+    $run_customer=mysqli_query($con,$select_customer);
+    $rows=mysqli_fetch_array($run_customer);
+    $customer_name=$rows['customer_name'];
+    $customer_image=$rows['customer_image'];
+
+  echo " <div class='panel-heading'>
+  <center>
+      <img src='customer_images/$customer_image' alt='Mdev Profile' width='200px'>
+  </center>
+  <br/>
+  <h3 align='center' class='panel-title'>
+      name: Mr. $customer_name
+  </h3>
+ </div> ";
+  ?>
    <div class="panel-body">
         <ul class="nav-pills nav-stacked nav">
             <li class="<?php if(isset($_GET['my_orders'])){ echo "active"; } ?>">

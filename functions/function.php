@@ -265,6 +265,40 @@ $db_name="db_store";
                 echo $total;
             }
     
+
+ //função login para os usuários
+    function login(){
+    global $con;
+    if (isset($_POST['submit'])) {
+        $customer_email=$_POST['email'];
+        $customer_password=$_POST['password'];
+        $customer_ip=getRealIpUser();
+
+        $sql2="SELECT * FROM customer WHERE customer_email='$customer_email' AND customer_password='$customer_password'";
+       $res2=mysqli_query($con,$sql2);
+       $customer_ip=getRealIpUser();
+       $customer_rows=mysqli_num_rows($res2);
+       $sql="SELECT * FROM cart WHERE ip_add='$customer_ip'";
+       $res3=mysqli_query($con,$sql);
+       $check=mysqli_num_rows($res3);
+       if ($customer_rows==0) {
+        echo "<script>alert('Senha ou email errado!')</script>";
+        exit();
+       }
+       if ($customer_rows==1 AND $check==0) {
+        $_SESSION['customer_email']=$customer_email;
+        echo "<script>alert('Seja bem-vindo $customer_email')</script>";
+        echo "<script>window.open('customer/my_account.php?my_orders','_self')</script>";
+       }else {
+        $_SESSION['customer_email']=$customer_email;
+        echo "<script>alert('Seja bem-vindo $customer_email')</script>";
+        echo "<script>window.open('customer/my_account.php?my_orders','_self')</script>";
+       }
+
+       
+
+        }
+    }
 ?>
     
  

@@ -1,5 +1,14 @@
-<?php include("../functions/function.php");?>
-<!DOCTYPE html>
+<?php
+session_start();
+$active="my_account";
+include("../functions/function.php");
+
+if (!isset($_SESSION['customer_email'])) {
+    echo "<script>window.open('../checkout.php','_self')</script>";
+}else {
+ ?>
+  
+  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,8 +26,15 @@
            
            <div class="col-md-6 offer"><!-- col-md-6 offer Begin -->
                
-               <a href="#" class="btn btn-success btn-sm">Welcome</a>
-               <a href="checkout.php"><?php items();?> Items In Your Cart | Total Price:<?php total();?> KZ </a>
+               <a href="#" class="btn btn-success btn-sm"><?php
+               
+               if (!isset($_SESSION['customer_email'])) {
+                echo "Bem-vindo :";
+               }else {
+                    echo "Bem-vindo:". $_SESSION['customer_email']."";
+                }
+               ?></a>
+               <a href="checkout.php"><?php items();?> Items In Your Cart</a>
                
            </div><!-- col-md-6 offer Finish -->
            
@@ -29,14 +45,21 @@
                    <li>
                        <a href="../customer_register.php">Register</a>
                    </li>
-                   <li>
+                   <li  class="<?php if ($active=='my_account') {echo "active";}?>">
                        <a href="my_account.php">My Account</a>
                    </li>
                    <li>
                        <a href="../cart.php">Go To Cart</a>
                    </li>
                    <li>
-                       <a href="checkout.php">Login</a>
+                       <a href="checkout.php"><?php
+               
+               if (!isset($_SESSION['customer_email'])) {
+                echo "<a href='../checkout.php'>Login</a>";
+               }else {
+                    echo "<a href='../logout.php'>Sair</a>";
+                }
+               ?></a>
                    </li>
                    
                </ul><!-- menu Finish -->
@@ -45,7 +68,7 @@
            
        </div><!-- container Finish -->
        
-   </div><!-- Top Finish -->
+    </div><!-- Top Finish -->
    
    <div id="navbar" class="navbar navbar-default"><!-- navbar navbar-default Begin -->
        
@@ -91,7 +114,7 @@
                            <a href="../shop.php">Shop</a>
                        </li>
                        <li class="active">
-                       <a href="customer/my_account.php">My Account</a>
+                       <a href="my_account.php">My Account</a>
                        </li>
                        <li>
                            <a href="../cart.php">Shopping Cart</a>
@@ -104,7 +127,7 @@
                    
                </div><!-- padding-nav Finish -->
                
-               <a href="cart.php" class="btn navbar-btn btn-primary right"><!-- btn navbar-btn btn-primary Begin -->
+               <a href="../cart.php" class="btn navbar-btn btn-primary right"><!-- btn navbar-btn btn-primary Begin -->
                    
                    <i class="fa fa-shopping-cart"></i>
                    
@@ -152,7 +175,7 @@
            
        </div><!-- container Finish -->
        
-   </div><!-- navbar navbar-default Finish -->
+    </div><!-- navbar navbar-default Finish -->
 
 
    <div id="content">
@@ -209,7 +232,7 @@
             </div>
         </div>
      </div>
-  </div>
+    </div>
 
 
 <?php include ("includes/footer.php");?>
@@ -217,3 +240,5 @@
     <script src="js/bootstrap-337.min.js"></script>
 </body>
 </html>
+
+  <?php }?>

@@ -75,7 +75,7 @@ include('includes/header.php') ?>
                                 <?php echo $produtc_size ;?>
                                 </td>
                                 <td>
-                                    <?php echo $p_id;?>
+                                    
                                     <input type="checkbox" name="remove[]" value=<?php echo $p_id;?>>
                                 </td>
                                 <td>
@@ -180,16 +180,24 @@ include('includes/header.php') ?>
                             <tbody>
                                 <tr>
                                     <td>Sub-total de todas as  encomenda</td>
-                                    <th><?php echo $sub_total;?> KZ</th>
+                                    <th><?php echo $total;?> KZ</th>
                                 </tr>
                                 <tr>
                                     <td>Envio da mercadoria</td>
-                                    <th><?php echo $ship=2500; ?>
-                                     KZ</th>
+                                    <td><?php if ($total==0) {
+                                        echo $total;
+                                    }
+                                    else {
+                                        echo $ship=2500;}?> KZ</td>
                                 </tr>
                                 <tr class="total">
                                     <td>Taxa :</td>
-                                    <th><?php echo $total +=$ship;?> KZ</th>
+                                    <th><?php if ($total==0) {
+                                        echo $total;
+                                    }
+                                    else {
+                                        echo $total +=$ship;
+                                    }?> KZ</th>
                                 </tr>
                             </tbody>
                         </table>

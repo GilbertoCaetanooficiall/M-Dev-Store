@@ -1,3 +1,13 @@
+
+<?php
+session_start();
+$active="my_account";
+include("../functions/function.php");
+
+if (!isset($_SESSION['customer_email'])) {
+    echo "<script>window.open('../checkout.php','_self')</script>";
+}else {
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +20,21 @@
 </head>
 <body>
    
-   <div id="top"><!-- Top Begin -->
+<div id="top"><!-- Top Begin -->
        
        <div class="container"><!-- container Begin -->
            
            <div class="col-md-6 offer"><!-- col-md-6 offer Begin -->
                
-               <a href="#" class="btn btn-success btn-sm">Welcome</a>
-               <a href="checkout.php">4 Items In Your Cart | Total Price: $300 </a>
+               <a href="#" class="btn btn-success btn-sm"><?php
+               
+               if (!isset($_SESSION['customer_email'])) {
+                echo "Bem-vindo :";
+               }else {
+                    echo "Bem-vindo:". $_SESSION['customer_email']."";
+                }
+               ?></a>
+               <a href="checkout.php"><?php items();?> Items In Your Cart</a>
                
            </div><!-- col-md-6 offer Finish -->
            
@@ -28,14 +45,21 @@
                    <li>
                        <a href="../customer_register.php">Register</a>
                    </li>
-                   <li>
+                   <li  class="<?php if ($active=='my_account') {echo "active";}?>">
                        <a href="my_account.php">My Account</a>
                    </li>
                    <li>
                        <a href="../cart.php">Go To Cart</a>
                    </li>
                    <li>
-                       <a href="checkout.php">Login</a>
+                       <a href="checkout.php"><?php
+               
+               if (!isset($_SESSION['customer_email'])) {
+                echo "<a href='../checkout.php'>Login</a>";
+               }else {
+                    echo "<a href='../logout.php'>Sair</a>";
+                }
+               ?></a>
                    </li>
                    
                </ul><!-- menu Finish -->
@@ -44,7 +68,7 @@
            
        </div><!-- container Finish -->
        
-   </div><!-- Top Finish -->
+    </div><!-- Top Finish -->
    
    <div id="navbar" class="navbar navbar-default"><!-- navbar navbar-default Begin -->
        
@@ -107,7 +131,7 @@
                    
                    <i class="fa fa-shopping-cart"></i>
                    
-                   <span>4 Items In Your Cart</span>
+                   <span><?php items();?> Items In Your Cart</span>
                    
                </a><!-- btn navbar-btn btn-primary Finish -->
                
@@ -175,16 +199,16 @@
         <div class="col-md-9">
             <div class="box">
                 <h1 align="center">Por favor confirme seu pagamento</h1>
-                <form action="confirm.php" method="post" enctype="multipart/form-data">
+             <form  method="post" >
                     
                 <div class="form-group">
                         <label>Invoice No:</label>
-                        <input type="text" class="form-control" name="invoice" required>
+                        <input type="text" class="form-control" name="invoice_no" required>
                     </div>
                     
                     <div class="form-goup">
                         <label>Montante</label>
-                        <input type="text" class="form-control" name="amount" required>
+                        <input type="text" class="form-control" name="due_amount" required>
                     </div>
                     
                     <br>
@@ -220,7 +244,8 @@
                     
                         <label>Data de pagamento</label>
                     
-                        <input type="text" class="form-control" name="date" required>
+                        <input type="datetime-local" name="payments_date" class="form-control" required>
+                        
                     
                     </div> 
                     
@@ -230,13 +255,48 @@
 
                         <button class="btn btn-primary btn-lg" name="submit">
                         
-                        <i class="fa fa-user-md"></i> Confirmar Pagamento
+                        <i class="fa fa-money"></i> Confirmar Pagamento
                         
                         </button>
                     
                     </div>
 
-                </form>
+             </form>
+                <?php
+                
+                if (isset($_POST['submit'])) {
+                    $update_id=$_GET['order_id'];
+                    $invoice_no=$_POST['invoice_no'];
+                    $due_amount=$_POST['due_amount'];
+                    $payment_mode=$_POST['payment_mode'];
+                    $ref_no=$_POST['ref_no'];
+                    $code=$_POST['code'];
+                    $payments_date=$_POST['payments_date'];
+
+                    $insert_payments="INSERT INTO payments SET
+                    invoice_no='$invoice_no',
+                    due_amount=' $due_amount',
+                    payment_mode=' $payment_mode',
+                    ref_no=' $ref_no',
+                    code=' $code',
+                    payments_date=' $payments_date'";
+                    
+                    $run_payments=mysqli_query($con,$insert_payments);
+                    
+                    $completo="completo";
+                    
+                    $update_c_order="UPDATE customer_order SET order_status='$completo' WHERE order_id='$update_id'";
+                    
+                    $run_c_orders=mysqli_query($con,$update_c_order);
+                    
+                    $update_p_order="UPDATE pending_orders SET order_status='$completo' WHERE order_id='$update_id'";
+                    
+                    $run_p_orders=mysqli_query($con,$update_p_order);
+                    if ($run_p_orders) {
+                        echo "<script>alert('Obrigado por tulizar os nossos serviços, a sua compra encomenda estará pronta dentro de 24 horas')</script>";
+                echo "<script>window.open('my_account.php?my_orders','_self')</script>";
+                    }
+                }?>
             </div>
         </div> 
     </div>
@@ -249,3 +309,5 @@
     <script src="js/bootstrap-337.min.js"></script>
 </body>
 </html>
+<?php }
+?>

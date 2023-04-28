@@ -1,4 +1,4 @@
-<?php include("includes/header.php") ?>
+<?php include("includes/header.php") ;?>
 
 
   <div id="content">
@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <label for="" class="col-md-5 control-label">Quantidade de produtos</label>
                             <div class="col-md-7">
-                                <select name="product_qty" class="form-control" required oninput="SetCustomValidity('')"
+                                <select name="product_qty" class="form-control"oninput="SetCustomValidity('')"
                                 oninvalid="SetCustomValidity('precisa de ter pelo menos um par selecionado')">
                                     <option selected disabled>numero de pares</option>
                                     <option>1</option>
@@ -76,8 +76,7 @@
                         <div class="form-group">
                             <label class="col-md-5 control-label">Tamanho do produto</label>
                             <div class="col-md-7">
-                                <select name="product_size" class="form-control" required oninput="setCustomValidity('')"
-                                oninvalid="setCustomValidity('precisa de ter pelo menos um tamanho')">
+                                <select name="product_size" class="form-control" required >
                                 <option disabled selected>selecione o tamanho</option>
                                 <option>36</option>
                                 <option>37</option>

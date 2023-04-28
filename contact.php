@@ -37,7 +37,7 @@ include('includes/header.php'); ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" name="name" class="form-control">
+                                    <input type="email" name="email" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Assunto</label>
@@ -53,6 +53,25 @@ include('includes/header.php'); ?>
                                     </button>
                                 </div>
                             </form>
+                            <?php
+                            if (isset($_POST['submit'])) {
+                                //feadback para o admin
+                                $sender_name=$_POST['name'];
+                                $sender_email="marcelocaetano655@gmail.com";
+                                $sender_subject=$_POST['subject'];
+                                $sender_message=$_POST['message'];
+                                mail($sender_email,$sender_message,$sender_name,$sender_subject);
+
+                                //mensagem automática
+                                $email=$_POST['email'];
+                                $subject="Seja Bem-vindo à nossa loja";
+                                $message="Agradecemos o vosso feadback, responderemos em breve";
+                                $from="marcelocaetano655@gmail.com";
+                                mail($email,$subject,$message,$from);
+                                
+                                echo "<h2 align='center'> Mensagem enviada com sucesso </h2>";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
