@@ -93,51 +93,64 @@ include('includes/header.php') ?>
     $customer_ip=getRealIpUser();
 
    
-    if (isset($_FILES['image_1']['name'])) {
-        //upload image
-        //to upload image we need  image name, source path and destination path
-        $customer_image=$_FILES['image_1']['name'];
-        
-       
-       //Get the extesion of our image(jpg,png, gift etc)
-       $sext = explode(".", $customer_image);
-        $file_ext = end($sext);
-
-
-
-       //rename the image
-       $customer_image ="fotos_de_cliente_cadastrados".rand(000,999).".".$file_ext;
-      
-
-       $src=$_FILES['image_1']['tmp_name'];
-       $dst="customer/customer_images/".$customer_image;
-      
-      
-       //finally uploaded the image 
-       $upload =move_uploaded_file($src, $dst);
-       
-        //Check Whether the image is uploaded or not
-        //and if the image is not uploaded then we will stop the process and redirect with erro message
-       
-       
-       
-        if ($upload == false) {
-        //set message
-        echo " falhou ao carregar a imagem";
-        //redirect to add category page
-        //stop the process
-        die();
-       }
     
-      
-     
-    }
    
     if (isset($_SESSION['customer_email'])) {
         echo "<script>alert('Já tem uma conta logada')</script>";
         echo "<script>window.open('index.php','_self')</script>";
     }else {
-        $sql="INSERT INTO customer SET
+        $verify="SELECT * FROM customer";
+        $verify_check=mysqli_query($con,$verify);
+        while ($row=mysqli_fetch_array($verify_check)) {
+            $cust=$row['customer_email'];
+            $pass=$row['customer_password'];
+            
+
+            if ($customer_email==$cust || $customer_password==$pass) {
+                echo "<script>alert('Esse email ou senha já está a ser utilizado')</script>";
+                echo "<script>window.open('customer_register.php','_self')</script>";
+                die();
+            } else {
+                if (isset($_FILES['image_1']['name'])) {
+                    //upload image
+                    //to upload image we need  image name, source path and destination path
+                    $customer_image=$_FILES['image_1']['name'];
+                    
+                   
+                   //Get the extesion of our image(jpg,png, gift etc)
+                   $sext = explode(".", $customer_image);
+                    $file_ext = end($sext);
+            
+            
+            
+                   //rename the image
+                   $customer_image ="fotos_de_cliente_cadastrados".rand(000,999).".".$file_ext;
+                  
+            
+                   $src=$_FILES['image_1']['tmp_name'];
+                   $dst="customer/customer_images/".$customer_image;
+                  
+                  
+                   //finally uploaded the image 
+                   $upload =move_uploaded_file($src, $dst);
+                   
+                    //Check Whether the image is uploaded or not
+                    //and if the image is not uploaded then we will stop the process and redirect with erro message
+                   
+                   
+                   
+                    if ($upload == false) {
+                    //set message
+                    echo " falhou ao carregar a imagem";
+                    //redirect to add category page
+                    //stop the process
+                    die();
+                   }
+                
+                  
+                 
+                }
+                $sql="INSERT INTO customer SET
         customer_name='$customer_name',
         customer_email='$customer_email',
         customer_contact='$customer_phone',
@@ -155,12 +168,16 @@ include('includes/header.php') ?>
         if ($check_cart>0) {
             $_SESSION['customer_email']=$customer_email;
             echo "<script>alert('Registro feito com sucesso')</script>";
-                echo "<script>window.open('index.php','_self')</script>";
+                echo "<script>window.open('checkout.php','_self')</script>";
         }else {
             $_SESSION['customer_email']=$customer_email;
             echo "<script>alert('Registro feito com sucesso')</script>";
                 echo "<script>window.open('index.php','_self')</script>";
         }
+            }
+            
+        }
+        
     }
         
    

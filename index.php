@@ -15,32 +15,42 @@ include('includes/header.php')
                    <li data-target="#myCarousel" data-slide-to="1"></li>
                    <li data-target="#myCarousel" data-slide-to="2"></li>
                    <li data-target="#myCarousel" data-slide-to="3"></li>
-                   
+                    <?php
+                         $get_slide="SELECT * FROM slider";
+                         $run_slide=mysqli_query($con,$get_slide);
+                        $rows=mysqli_num_rows($run_slide);                       
+                       
+                        $get_slides="SELECT * FROM slider LIMIT 0,1";
+                        $run_slides=mysqli_query($con,$get_slides);
+                       
+                         while ($row=mysqli_fetch_array($run_slides)) {
+                        $name_slides=$row['name_slide'];
+                        $image_slides=$row['image_slide'];
+                        $link_slides=$row['link_slide'];
+                        ?>
                </ol><!-- carousel-indicators Finish -->
                
                <div class="carousel-inner"><!-- carousel-inner Begin -->
                    
                    
-                       <?php
-                       $get_slides="SELECT * FROM slider LIMIT 0,1";
-                       $run_slides=mysqli_query($con,$get_slides);
-                       while ($row=mysqli_fetch_array($run_slides)) {
-                        $name_slides=$row['name_slide'];
-                        $image_slides=$row['image_slide'];
-                        ?>
+                      
                         <div class="item active">
-                        <img src="admin_area/slides_images/<?php echo $image_slides ;?>" alt="<?php echo $name_slides;?>">
+                        <a href="<?php echo $link_slides?>">
+                        <img src="admin_worker_area/slides_images/<?php echo $image_slides ;?>" alt="<?php echo $name_slides;?>">
+                        </a>
                         </div>
                         <?php
                        }
-                            $get_slides="SELECT * FROM slider LIMIT 1,3";
+                            $get_slides="SELECT * FROM slider LIMIT 1,$rows";
                             $run_slides=mysqli_query($con,$get_slides);
                             while ($row=mysqli_fetch_array($run_slides)) {
                              $name_slides=$row['name_slide'];
                              $image_slides=$row['image_slide'];
                              ?>
                              <div class="item">
-                             <img src="admin_area/slides_images/<?php echo $image_slides ;?>" alt="<?php echo $name_slides;?>">
+                             <a href="<?php echo $link_slides?>">
+                             <img src="admin_worker_area/slides_images/<?php echo $image_slides ;?>" alt="<?php echo $name_slides;?>">
+                             </a>
                              </div> 
                              <?php
                        }?>                      
@@ -79,7 +89,7 @@ include('includes/header.php')
                             <i class="fa fa-heart"></i>
                        
                         </div>
-                        <h3><a href="#">A mamos nossos clientes</a></h3>
+                        <h3><a href="#">Amamos nossos clientes</a></h3>
                         <p>Nós sabemos providenciar o melhor dos possíveis serviços de sempre. </p>
                     </div>
                 </div>
@@ -119,7 +129,7 @@ include('includes/header.php')
                 <div class="col-md-12">
 
                         <h2>
-                            Nossos últimos produtos
+                             Últimos lançamentos
                         </h2>
                 </div>
             </div>

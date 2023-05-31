@@ -194,6 +194,16 @@ if (!isset($_SESSION['customer_email'])) {
         <div class="col-md-3">
             <?php
              include ("includes/sidebar.php");
+             $update_id=$_GET['order_id'];
+             $get_customer_orders="SELECT * FROM customer_order WHERE order_id='$update_id'";
+              $run_customer_orders=mysqli_query($con,$get_customer_orders);
+                                
+              while ($count_c_o=mysqli_fetch_array($run_customer_orders)) {
+             $due_amoun=$count_c_o['due_amount'];
+             $customer_id=$count_c_o['customer_id'];
+             $id_produto=$count_c_o['id_produto'];
+             $invoice_n=$count_c_o['invoice_no'];
+            }
              ?>
         </div>
         <div class="col-md-9">
@@ -203,20 +213,20 @@ if (!isset($_SESSION['customer_email'])) {
                     
                 <div class="form-group">
                         <label>Invoice No:</label>
-                        <input type="text" class="form-control" name="invoice_no" required>
+                        <input type="text" class="form-control" value="<?php echo $invoice_n;?>"  name="invoice_no" disabled>
                     </div>
                     
                     <div class="form-goup">
                         <label>Montante</label>
-                        <input type="text" class="form-control" name="due_amount" required>
+                        <input type="text" class="form-control" value="<?php echo $due_amoun;?>" name="due_amount" disabled>
                     </div>
                     
                     <br>
                     
                     <div class="form-goup">
                         <label>Selecione o metodo de pagamento :</label>
-                       <select name="payment_mode" class="form-control">
-                        <option>Selecione o modo de pagamento:</option>
+                       <select name="payment_mode" required class="form-control">
+                        <option disabled>Selecione o modo de pagamento:</option>
                         <option>Paypal</option>
                         <option>Pagseguro</option>
                         <option>Union Pay</option>
@@ -265,7 +275,7 @@ if (!isset($_SESSION['customer_email'])) {
                 <?php
                 
                 if (isset($_POST['submit'])) {
-                    $update_id=$_GET['order_id'];
+                    $update_id;
                     $invoice_no=$_POST['invoice_no'];
                     $due_amount=$_POST['due_amount'];
                     $payment_mode=$_POST['payment_mode'];
@@ -274,11 +284,14 @@ if (!isset($_SESSION['customer_email'])) {
                     $payments_date=$_POST['payments_date'];
 
                     $insert_payments="INSERT INTO payments SET
-                    invoice_no='$invoice_no',
-                    due_amount=' $due_amount',
+                    invoice_no='$invoice_n',
+                    due_amount=' $due_amoun',
                     payment_mode=' $payment_mode',
+                    customer_id='$customer_id',
+                    id_produto='$id_produto',
                     ref_no=' $ref_no',
                     code=' $code',
+                    
                     payments_date=' $payments_date'";
                     
                     $run_payments=mysqli_query($con,$insert_payments);
@@ -293,8 +306,8 @@ if (!isset($_SESSION['customer_email'])) {
                     
                     $run_p_orders=mysqli_query($con,$update_p_order);
                     if ($run_p_orders) {
-                        echo "<script>alert('Obrigado por tulizar os nossos serviços, a sua compra encomenda estará pronta dentro de 24 horas')</script>";
-                echo "<script>window.open('my_account.php?my_orders','_self')</script>";
+                        echo "<script>alert('Obrigado por utilizar os nossos serviços, a sua compra encomenda estará pronta dentro de 24 horas')</script>";
+                        echo "<script>window.open('my_account.php?my_orders','_self')</script>";
                     }
                 }?>
             </div>

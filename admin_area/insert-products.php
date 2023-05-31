@@ -1,19 +1,7 @@
-<?php include("includes/db.php");?>
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap-337.min.css">
-    <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
-    <title>Inserir Productos</title>
-    <link rel="stylesheet" href="product_images/product_images_1/">
-   
-
-</head>
-<body>
-
+<?php if (!isset($_SESSION['admin_email'])) {
+    echo "<script>window.open('login.php','_self')</script>";
+}else {
+    ?>
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
@@ -29,7 +17,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <i class="fa fa-money"></i> Inserir produtos
+                    <i class="fa fa-tags"></i> Inserir produtos
                 </h3>
             </div>
             <div class="panel-body">
@@ -87,13 +75,13 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Imagens dos productos 2</label>
                         <div class="col-md-6">
-                            <input name="image_2" type="file" class="form-control">
+                            <input name="image_2" type="file" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Imagens dos productos 3</label>
                         <div class="col-md-6">
-                            <input name="image_3" type="file" class="form-control">
+                            <input name="image_3" type="file" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -125,16 +113,8 @@
         </div>
     </div>
 </div>
-
-
-
-</body>
-</html>
-
 <script src="js/tinymce/js/tinymce/tinymce.min.js"></script>
 <script>tinymce.init({selector:'textarea'});</script>
-<script src="js/jquery-331.min.js"></script>
-<script src="js/bootstrap-337.min.js"></script>
 
 <?php
 if (isset($_POST['insert'])) {
@@ -175,9 +155,9 @@ if (isset($_POST['insert'])) {
        $src=$_FILES['image_1']['tmp_name'];
        $src2=$_FILES['image_2']['tmp_name'];
        $src3=$_FILES['image_3']['tmp_name'];
-       $dst="product_images/product_images_1/".$product_image;
-       $dst2="product_images/product_images_2/".$product_image2;
-       $dst3="product_images/product_images_3/".$product_image3;
+       $dst="../admin_worker_area/product_images/product_images_1/".$product_image;
+       $dst2="../admin_worker_area/product_images/product_images_2/".$product_image2;
+       $dst3="../admin_worker_area/product_images/product_images_3/".$product_image3;
       
        //finally uploaded the image 
        $upload =move_uploaded_file($src, $dst);
@@ -208,6 +188,8 @@ if (isset($_POST['insert'])) {
          id_cat='$cats',
          product_price='$product_price',
          product_image='$product_image',
+         product_img2='$product_image2',
+         product_img3='$product_image3',
          product_desc='$product_desc',
          product_keywords='$product_keywords',
          product_date= NOW()
@@ -220,7 +202,7 @@ if (isset($_POST['insert'])) {
          if($res2==true){
             //Query executed and category added
             echo "<script>alert('foi adicionado um novo producto com sucesso')</script>";
-            echo "<script>window.open('insert-products.php','_self')</script>";
+            echo "<script>window.open('index.php?view_products','_self')</script>";
            
             //Redirect to manage category page
             
@@ -232,5 +214,7 @@ if (isset($_POST['insert'])) {
                echo " Falhou em adicionar uma nova comida.";
                
         }
+}
+
 }
 ?>

@@ -34,7 +34,7 @@ if (isset($_GET['id_produto'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>M-Dev Store</title>
+    <title>G-STORE</title>
     <link rel="stylesheet" href="styles/bootstrap-337.min.css">
     <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/style.css">
@@ -46,16 +46,21 @@ if (isset($_GET['id_produto'])) {
        <div class="container"><!-- container Begin -->
            
            <div class="col-md-6 offer"><!-- col-md-6 offer Begin -->
-               
-               <a href="#" class="btn btn-success btn-sm"><?php
+           <?php
                
                if (!isset($_SESSION['customer_email'])) {
-                echo "Bem-vindo :";
-               }else {
-                    echo "Bem-vindo:". $_SESSION['customer_email']."";
+                echo "<a href='#' class='btn btn-success btn-sm'>Bem-vindo :</a>";
+                echo "<a href='#'> Items In Your Cart </a>";
+
+               }
+               else {
+                    echo " <a href='#'  class='btn btn-success btn-sm'>".$_SESSION['customer_email']."</a>";
+                    echo "<a href='checkout.php'> ".items()." Items In Your Cart </a>";
                 }
-               ?></a>
-               <a href="checkout.php"><?php items(); ?> Items In Your Cart </a>
+                
+               ?>
+               
+              
                
            </div><!-- col-md-6 offer Finish -->
            

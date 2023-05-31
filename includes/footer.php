@@ -27,6 +27,7 @@
                     <li><a href='customer_register.php'>Register</a></li>";
                    }
                    ?>
+                   <li><a href="term.php">Termos e Condições</a></li>
                 </ul>
 
                 <hr class="hidden-md hidden-lg hidden-sm">

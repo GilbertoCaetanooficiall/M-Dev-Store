@@ -16,7 +16,7 @@
         <p class="lead">
             <a href="">
                 Pague com o Paypal
-                <img src="customer/customer_images/IMG_06392 (2).jpg" alt="" class="img-responsive">
+                <img src="customer/customer_images/paypal.webp" alt="" class="img-responsive">
             </a>
         </p>
     </center>

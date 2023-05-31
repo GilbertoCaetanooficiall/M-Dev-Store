@@ -44,7 +44,7 @@ include('includes/header.php') ?>
                             $total= 0;
                             while ($row=mysqli_fetch_array($res)) {
                                $product_qty=$row['qty'];
-                               $p_id=$row['p_id'];
+                               $p_id=$row['id_produto'];
                                $ip_add=$row['ip_add'];
                                $produtc_size=$row['size'];
 
@@ -60,10 +60,10 @@ include('includes/header.php') ?>
                              ?>
                             <tr>
                                 <td>
-                                    <img  src="admin_area/product_images/product_images_1/<?php echo $product_image;?>" alt="product 3-a" class="img-responsive">
+                                    <img  src="admin_worker_area/product_images/product_images_1/<?php echo $product_image;?>" alt="product 3-a" class="img-responsive">
                                 </td>
                                 <td>
-                                    <a href="details.php?id_produto=<?php echo $p_id;?>"><?php echo $product_title ;?> </a>
+                                    <a href="details.php?id_produto=<?php echo $p_id;?>" style="text-decoration: none;"><?php echo $product_title ;?> </a>
                                 </td>
                                 <td>
                                 <?php echo $product_qty;?>
@@ -150,7 +150,7 @@ include('includes/header.php') ?>
                     <div class="product same-heigth">
                         
                         <a href="details.php?id_produto=<?php echo $product_id;?>">
-                            <img src="admin_area/product_images/product_images_1/<?php echo $product_image;?>" width="100%" class="img-responsive">
+                            <img src="admin_worker_area/product_images/product_images_1/<?php echo $product_image;?>" width="100%" class="img-responsive">
                         </a>
                         <div class="text">
                             <h3><a href="details.php?id_produto=<?php echo $product_id;?>"><?php echo $product_title; ?></a></h3>

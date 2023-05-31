@@ -92,8 +92,8 @@ body{
 }
 .btn-primary{
     color: rgb(255, 255, 255);
-    background: rgb(79, 191, 168);
-    border-color: rgb(65, 179, 156);
+    background: #0a2d63;
+    border-color: #0a2d63;
 }
 #search .navbar-form{
     float: right;
@@ -149,7 +149,7 @@ body{
     z-index: 2;
  }
  #advantages .box h3 a{
-    color: #4fdba8;
+    color: #0a2d63;
  }
  #advantages .box h3 a:hover{
     text-decoration: none;
@@ -165,7 +165,7 @@ body{
     font-size: 36px;
     font-weight: 400;
     text-align: center;
-    color:#4fdba8;
+    color:#0a2d63;
     text-transform: uppercase;
 
  }

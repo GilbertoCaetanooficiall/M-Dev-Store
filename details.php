@@ -33,13 +33,13 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <center><img  src="admin_area/product_images/product_images_1/<?php echo $product_image;?>" alt="product 3-a"height="400px" width="400px"></center>
+                                    <center><img  src="admin_worker_area/product_images/product_images_1/<?php echo $product_image;?>" alt="product 3-a"height="400px" width="400px"></center>
                                 </div>
                                 <div class="item">
-                                    <center><img src="admin_area/product_images/product_images_2/<?php echo $product_img2;?>" alt="product 3-b" height="400px" width="400px"></center>
+                                    <center><img src="admin_worker_area/product_images/product_images_2/<?php echo $product_img2;?>" alt="product 3-b" height="400px" width="400px"></center>
                                 </div>
                                 <div class="item">
-                                    <center><img src="admin_area/product_images/product_images_3/<?php echo $product_img3;?>" alt="product 3-c"height="400px" width="400px"></center>
+                                    <center><img src="admin_worker_area/product_images/product_images_3/<?php echo $product_img3;?>" alt="product 3-c"height="400px" width="400px"></center>
                                 </div>
                             </div>
                             <a href="#myCarousel" class="left carousel-control" data-slide="prev">
@@ -62,12 +62,10 @@
                         <div class="form-group">
                             <label for="" class="col-md-5 control-label">Quantidade de produtos</label>
                             <div class="col-md-7">
-                                <select name="product_qty" class="form-control"oninput="SetCustomValidity('')"
+                                <select requi name="product_qty" class="form-control" required oninput="SetCustomValidity('')"
                                 oninvalid="SetCustomValidity('precisa de ter pelo menos um par selecionado')">
-                                    <option selected disabled>numero de pares</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option >3</option>
+                                    <option value="" selected disabled>numero de pares</option>
+                                    <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
                                 </select>
@@ -76,13 +74,12 @@
                         <div class="form-group">
                             <label class="col-md-5 control-label">Tamanho do produto</label>
                             <div class="col-md-7">
-                                <select name="product_size" class="form-control" required >
-                                <option disabled selected>selecione o tamanho</option>
-                                <option>36</option>
-                                <option>37</option>
-                                <option>38</option>
-                                <option>39</option>
-                                <option>40</option>
+                                <select name="product_size" class="form-control" required oninput="SetCustomValidity('')"
+                                oninvalid="SetCustomValidity('precisa de ter pelo menos um par selecionado')" >
+                                <option value="" disabled selected>selecione o tamanho</option>
+                                <option>Pequeno</option>
+                                <option>Médio</option>
+                                <option>Largo</option>
                                 </select>
                             </div>
                         </div>
@@ -97,17 +94,17 @@
                 <div class="row" id="thumbs">
                     <div class="col-xs-4">
                         <a data-target="#myCarousel" data-slide-to="0" class="thumb">
-                            <img  src="admin_area/product_images/product_images_1/<?php echo $product_image;?>" alt="product 3-a" class="img-responsive">
+                            <img  src="admin_worker_area/product_images/product_images_1/<?php echo $product_image;?>" alt="product 3-a" class="img-responsive">
                         </a>
                     </div>
                     <div class="col-xs-4">
                         <a data-target="#myCarousel" data-slide-to="1" class="thumb">
-                            <img src="admin_area/product_images/product_images_2/<?php echo $product_img2;?>" alt="product 3-b" class="img-responsive">
+                            <img src="admin_worker_area/product_images/product_images_2/<?php echo $product_img2;?>" alt="product 3-b" class="img-responsive">
                         </a>
                     </div>
                     <div class="col-xs-4">
                         <a data-target="#myCarousel" data-slide-to="2" class="thumb">
-                            <img src="admin_area/product_images/product_images_3/<?php echo $product_img3;?>" alt="product 3-c" alt="" class="img-responsive">
+                            <img src="admin_worker_area/product_images/product_images_3/<?php echo $product_img3;?>" alt="product 3-c" alt="" class="img-responsive">
                         </a>
                     </div>
                 </div>
@@ -121,9 +118,9 @@
                 </p>
                 <h4>Tamanho</h4>
                 <ul>
-                    <li>37</li>
-                    <li>40</li>
-                    <li>42</li>
+                    <li>Pequeno</li>
+                    <li>Médio</li>
+                    <li>Largo</li>
                     <hr>
                 </ul>
             </div>
@@ -149,7 +146,7 @@
                     <div class="product same-heigth">
                         
                         <a href="details.php?id_produto=<?php echo $product_id;?>">
-                            <img src="admin_area/product_images/product_images_1/<?php echo $product_image;?>" width="100%" class="img-responsive">
+                            <img src="admin_worker_area/product_images/product_images_1/<?php echo $product_image;?>" width="100%" class="img-responsive">
                         </a>
                         <div class="text">
                             <h3><a href="details.php?id_produto=<?php echo $product_id;?>"><?php echo $product_title; ?></a></h3>

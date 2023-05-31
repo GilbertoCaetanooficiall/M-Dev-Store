@@ -48,40 +48,7 @@ include('includes/header.php'); ?>
                 else{
                     $page=1;
                 }
-                    $start_from= ($page-1) * $per_page;
-                    $get_products="SELECT * FROM products order by 1 DESC LIMIT $start_from, $per_page";
-                    $res=mysqli_query($con,$get_products);
-                    while ($rows=mysqli_fetch_array($res)) {
-                    $product_id=$rows['id_produto'];
-                    $product_title=$rows['product_title'];
-                    $product_image=$rows['product_image'];
-                    $product_price=$rows['product_price'];
-    
-                        echo "<div class='col-md-4 col-sm-6 center-responsive'>
-                        <div class='product'>
-                            <a href='details.php?id_produto=$product_id'>
-                                <img  class= 'img-responsive' src='admin_area/product_images/product_images_1/$product_image'  alt='Product 1' width='100%'>
-                            </a>
-                                <div class='text'>
-                                    <h3>
-                                        <a href='details.php?id_produto=$product_id'>
-                                            $product_title
-                                        </a>
-                                    </h3>
-                                    <p class='price'> $product_price KZ</p>
-                                    <p class='buttons'>
-                                        <a href='details.php?id_produto=$product_id' class='btn btn-default'>Detalhes</a>
-                                        <a href='details.php?id_produto=$product_id' class='btn btn-primary'>
-                                            <i class='fa fa-shopping-cart'>
-                                            Add ao carrinho
-                                            </i>
-                                        </a>
-                                    </p>
-                                </div>
-                        </div>
-                    </div>";
-                        
-                    }
+                getpro();
       ?>
           </div>
 
@@ -98,7 +65,7 @@ include('includes/header.php'); ?>
                     <a href='shop.php?page=1'>".'First Page'."</a>
                     </li>
                     ";
-                    for ($i=2; $i<=$total_pages ; $i++) {                      # code...
+                    for ($i=1; $i<=$total_pages ; $i++) {                      # code...
                     echo "<li>
                     <a href='shop.php?page=".$i."'>".$i."</a>
                     </li>";

@@ -40,7 +40,7 @@
         
         <label >Cidade</label>
         
-        <input type="text" name="customer_city" class="form-control" required>
+        <input type="text" name="customer_city" class="form-control" value="<?php echo $customer_city;?>" required>
     
     </div>
 
@@ -48,7 +48,7 @@
         
         <label >contacto</label>
         
-        <input type="tel" name="phone" class="form-control" required>
+        <input type="tel" name="phone" class="form-control" value="<?php echo $customer_contact;?>" required>
     
     </div>
 
@@ -56,7 +56,7 @@
         
         <label >Endereço</label>
         
-        <input type="text" name="customer_address" class="form-control" required>
+        <input type="text" name="customer_address" class="form-control" value="<?php echo $customer_address;?>" required>
     
     </div>
 
@@ -66,7 +66,7 @@
         
         <input type="file" name="image" class="form-control" required>
         <br>
-        <img src="customer_images/IMG_06392 (2).jpg" alt="Mdev Profile" class="img-responsive"  width="200px">
+        <img src="customer_images/<?php echo $customer_image;?>" alt="Mdev Profile" class="img-responsive"  width="200px">
     
     </div>
 
@@ -77,3 +77,33 @@
         </button>
     </div>
 </form>
+<?php if (isset($_POST['update'])) {
+    $update_id=$customer_id;
+    $name=$_POST['customer_name'];
+    $email=$_POST['customer_email'];
+    $country=$_POST['customer_country'];
+    $city=$_POST['customer_city'];
+    $contact=$_POST['phone'];
+    $address=$_POST['customer_address'];
+    $image=$_FILES['image']['name'];
+    $image_tmp=$_FILES['image']['tmp_name'];
+    move_uploaded_file($image_tmp,"customer_images/$image");
+
+    $update_customer="UPDATE customer SET 
+    customer_name='$name',
+    customer_email='$email',
+    customer_country='$country',
+    customer_city='$city',
+    customer_contact='$contact',
+    customer_address='$address',
+    customer_image='$image'
+    WHERE customer_id='$update_id'";
+
+    $run_update=mysqli_query($con,$update_customer);
+
+    if ($run_update) {
+        echo "<script>alert('dados foram actualizados com sucesso')</script>";
+        echo "<script>window.open('my_account.php','_self')</script>";
+      
+    }
+}?>

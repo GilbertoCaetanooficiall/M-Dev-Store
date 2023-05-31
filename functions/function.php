@@ -26,7 +26,7 @@ $db_name="db_store";
             $p_id=$_GET['add_cart'];
             $product_qty=$_POST['product_qty'];
             $product_size=$_POST['product_size'];
-            $check_products="SELECT * FROM cart WHERE ip_add='$ip_add' AND p_id='$p_id'";
+            $check_products="SELECT * FROM cart WHERE ip_add='$ip_add' AND id_produto='$p_id'";
             $res=mysqli_query($con,$check_products);
             if (mysqli_num_rows($res)>0) {
                 echo "<script>alert('Este produto já foi adicionado ao carrinho')</script>";
@@ -35,12 +35,12 @@ $db_name="db_store";
             else {
                 
                 $sql="INSERT INTO cart SET
-                p_id='$p_id',
+                id_produto='$p_id',
                 ip_add='$ip_add',
                 qty='$product_qty',
                 size='$product_size'";
                 $res=mysqli_query($con,$sql);    
-                echo "<script>window.open('details.php?id_produto=$p_id','_self')</script>";
+                echo "<script>window.open('cart.php','_self')</script>";
             }
         }
         }
@@ -58,7 +58,7 @@ $db_name="db_store";
             echo "<div class='col-sm-4 col-sm-6 single'>
             <div class='product'>
                 <a href='details.php?id_produto=$product_id'>
-                    <img  class= 'img-responsive' src='admin_area/product_images/product_images_1/$product_image'  alt='Product 1' width='100%'>
+                    <img  class= 'img-responsive' src='admin_worker_area/product_images/product_images_1/$product_image'  alt='Product 1' width='100%'>
                 </a>
                     <div class='text'>
                         <h3>
@@ -150,7 +150,7 @@ $db_name="db_store";
                                 echo "<div class='col-md-4 col-sm-6 center-responsive'>
                 <div class='product'>
                     <a href='details.php?id_produto=$product_id'>
-                        <img  class= 'img-responsive' src='admin_area/product_images/product_images_1/$product_image'  alt='Product 1' width='100%'>
+                        <img  class= 'img-responsive' src='admin_worker_area/product_images/product_images_1/$product_image'  alt='Product 1' width='100%'>
                     </a>
                         <div class='text'>
                             <h3>
@@ -209,7 +209,7 @@ $db_name="db_store";
                     echo "<div class='col-md-4 col-sm-6 center-responsive'>
                         <div class='product'>
                         <a href='details.php?id_produto=$product_id'>
-                            <img  class= 'img-responsive' src='admin_area/product_images/product_images_1/$product_image'  alt='Product 1' width='100%'>
+                            <img  class= 'img-responsive' src='admin_worker_area/product_images/product_images_1/$product_image'  alt='Product 1' width='100%'>
                         </a>
                             <div class='text'>
                                 <h3>

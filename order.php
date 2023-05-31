@@ -14,7 +14,7 @@ if (isset($_GET['c_id'])) {
   $res=mysqli_query($con,$select_cart);
   $rabo=date('y-m-d h:i:sa');
   while ($row=mysqli_fetch_array($res)) {
-    $p_id=$row['p_id'];
+    $p_id=$row['id_produto'];
     $qty=$row['qty'];
     $size=$row['size'];
     
@@ -26,6 +26,7 @@ if (isset($_GET['c_id'])) {
         
         $insert="INSERT INTO customer_order SET
         customer_id='$customer_id',
+        id_produto='$p_id',
         due_amount='$subtotal',
         invoice_no='$invoice_no',
         qty='$qty',
