@@ -125,12 +125,12 @@ if (isset($_POST['insert'])) {
    $product_price= $_POST['price'];
    $product_keywords= $_POST['keywords'];
    $product_desc= $_POST['product_desc'];
-   $product_image=$_FILES['image_1']['name'];
+   echo var_dump($product_image=$_FILES['image_1']['tmp_name']);
    $product_image2=$_FILES['image_2']['name'];
    $product_image3=$_FILES['image_3']['name'];
    
 
-
+   
     if (isset($_FILES['image_1']['name']) && isset($_FILES['image_2']['name']) && isset($_FILES['image_3']['name'])) {
         //upload image
         //to upload image we need  image name, source path and destination path
@@ -151,6 +151,11 @@ if (isset($_POST['insert'])) {
        $product_image ="1_fotos_de_produtos_".rand(000,999).".".$file_ext;
        $product_image2 ="2_fotos_de_produtos_".rand(000,999).".".$file_ext_2;
        $product_image3 ="3_fotos_de_produtos_".rand(000,999).".".$file_ext_3;
+      
+      
+
+
+      
 
        $src=$_FILES['image_1']['tmp_name'];
        $src2=$_FILES['image_2']['tmp_name'];
@@ -174,6 +179,70 @@ if (isset($_POST['insert'])) {
         //redirect to add category page
         //stop the process
         die();
+       }else {
+        $dst="../admin_worker_area/product_images/product_images_1/".$product_image;
+
+        // Novas dimensões desejadas
+        $novaLargura = 750;
+        $novaAltura = 750;
+        
+        // Obtém as dimensões originais da imagem
+        list($larguraOriginal, $alturaOriginal) = getimagesize($dst);
+        
+        // Cria uma nova imagem com as dimensões desejadas
+        $new_product_image = imagecreatetruecolor($novaLargura, $novaAltura);
+        
+        // Carrega a imagem original
+        $imagem = imagecreatefromjpeg($dst);
+        
+        // Redimensiona a imagem para as novas dimensões
+        imagecopyresampled($new_product_image, $imagem, 0, 0, 0, 0, $novaLargura, $novaAltura, $larguraOriginal, $alturaOriginal);
+        
+        // Salva a nova imagem em um arquivo ou exibe no navegador
+        imagejpeg($new_product_image, '../admin_worker_area/product_images/product_images_1/'.$product_image);
+        
+        // Libera a memória utilizada pelas imagens
+        imagedestroy($imagem);
+        imagedestroy($new_product_image);
+               $dst2="../admin_worker_area/product_images/product_images_2/".$product_image2;
+        
+               list($larguraOriginal2, $alturaOriginal2) = getimagesize($dst2);
+        
+               // Cria uma nova imagem com as dimensões desejadas
+               $new_product_image2 = imagecreatetruecolor($novaLargura, $novaAltura);
+               
+               // Carrega a imagem original
+               $imagem2 = imagecreatefromjpeg($dst2);
+               
+               // Redimensiona a imagem para as novas dimensões
+               imagecopyresampled($new_product_image2, $imagem2, 0, 0, 0, 0, $novaLargura, $novaAltura, $larguraOriginal2, $alturaOriginal2);
+               
+               // Salva a nova imagem em um arquivo ou exibe no navegador
+               imagejpeg($new_product_image2, '../admin_worker_area/product_images/product_images_2/'.$product_image2);
+               
+               // Libera a memória utilizada pelas imagens
+               imagedestroy($imagem2);
+               imagedestroy($new_product_image2);
+        
+               $dst3="../admin_worker_area/product_images/product_images_3/".$product_image3;
+        
+               list($larguraOriginal3, $alturaOriginal3) = getimagesize($dst3);
+        
+               // Cria uma nova imagem com as dimensões desejadas
+               $new_product_image3 = imagecreatetruecolor($novaLargura, $novaAltura);
+               
+               // Carrega a imagem original
+               $imagem3 = imagecreatefromjpeg($dst3);
+               
+               // Redimensiona a imagem para as novas dimensões
+               imagecopyresampled($new_product_image3, $imagem3, 0, 0, 0, 0, $novaLargura, $novaAltura, $larguraOriginal3, $alturaOriginal3);
+               
+               // Salva a nova imagem em um arquivo ou exibe no navegador
+               imagejpeg($new_product_image3, '../admin_worker_area/product_images/product_images_3/'.$product_image3);
+               
+               // Libera a memória utilizada pelas imagens
+               imagedestroy($imagem3);
+               imagedestroy($new_product_image3);
        }
     
       

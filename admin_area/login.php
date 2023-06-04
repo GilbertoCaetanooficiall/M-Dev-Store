@@ -90,7 +90,7 @@
     $count=mysqli_num_rows($run_worker);
     if ($count==1) {
         $_SESSION['worker_email']=$worker_email;
-        echo "<script>alert('Bem-vindo $worker_email')</script>";
+        echo "<script>console.log('Bem-vindo $worker_email')</script>";
                 echo "<script>window.open('../admin_worker_area/index.php?dashboard','_self')</script>";
     } else {
         echo "<script>alert('Email ou palavra-passe errada')</script>";
